@@ -1,3 +1,5 @@
+# If you have any problems with running app with Visual Studio, please install npm package Microsoft.Net.Compilers (more details there: https://improveandrepeat.com/2020/03/how-to-fix-could-not-find-binroslyncsc-exe/)
+
 # Web API prototype project
 This repository stores a REST API project. It is a small prototype that is similar to a real project, that will be relevant for the back-end position.
 
