@@ -40,6 +40,12 @@ This also benefits from the use of enums otherwise is might as well be set as th
 It might have been done to maintain brevity in this test.
 
 
+
+Domain-models vs. DTOs:
+
+DTOs need to be added to prevent exposure of domain models.
+
+
 Book vs. User:
 
 Methods like CreateUserBook and GetUserBooks should be owned and managed by the BookController and not the UserController.
