@@ -1,45 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Runtime.Serialization;
-using System.Web;
 
-namespace BookApp.Helper {
-    /// <summary>
-    /// Api Exception
-    /// </summary>
+namespace BookApp.Helper
+{
+
     [Serializable]
     [DataContract]
-    public class APIException : Exception, IAPIException {
+    public class APIException : Exception, IAPIException
+    {
         #region Public Serializable properties.
-        /// <summary>
-        /// Error Code
-        /// </summary>
-        [DataMember]
-        public int ErrorCode { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        [DataMember]
 
-        public string ErrorDescription { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
         [DataMember]
-        public HttpStatusCode HttpStatus { get; set; }
+        public int ErrorCode { get; set; } = (int)HttpStatusCode.BadRequest;
 
-        string reasonPhrase = "ApiException";
-        /// <summary>
-        /// 
-        /// </summary>
         [DataMember]
-        public string ReasonPhrase {
-            get { return this.reasonPhrase; }
+        public string ErrorDescription { get; set; } = "Bad Request. Provide valid object. Object can't be null.";
 
-            set { this.reasonPhrase = value; }
-        }
+        [DataMember]
+        public HttpStatusCode HttpStatus { get; set; } = HttpStatusCode.BadRequest;
+
+        [DataMember]
+        public string ReasonPhrase { get; set; } = "ApiException";
+
         #endregion
     }
 }
