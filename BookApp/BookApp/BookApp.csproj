@@ -308,6 +308,7 @@
     <Compile Include="Helper\APIDataException.cs" />
     <Compile Include="Helper\APIException.cs" />
     <Compile Include="Helper\ErrorCodes.cs" />
+    <Compile Include="Helper\GlobalMediaTypeFormatters.cs" />
     <Compile Include="Helper\IAPIException.cs" />
     <Compile Include="Helper\ServiceStatus.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
