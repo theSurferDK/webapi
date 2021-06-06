@@ -39,7 +39,7 @@ namespace BookApp.Controllers
                 throw new APIException()
                 {
                     ErrorCode = (int)HttpStatusCode.BadRequest,
-                    ErrorDescription = "Bad Request. Provide valid bookId guid. Can't be empty guid.",
+                    ErrorDescription = "Bad Request. Provide valid guid. Can't be empty guid.",
                     HttpStatus = HttpStatusCode.BadRequest
                 };
             var book = BookService.GetBookById(bookId);
