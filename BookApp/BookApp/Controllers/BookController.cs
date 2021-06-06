@@ -21,17 +21,14 @@ namespace BookApp.Controllers
     {
         private GlobalMediaTypeFormatters globalMediaTypeFormatters = new GlobalMediaTypeFormatters();
         private IBookService BookService;
-        //private IBookRepository BookRepository;
 
-        public BookController()
-        {
-        }
+        public BookController() { }
+
         public BookController(IBookService bookService)
-        {//, IBookRepository bookRepository) {
+        {
             BookService = bookService;
         }
 
-        /* This method was from UserController because it makes more sense to have it here since it is a book-operation and not user-operation */
         /* This method was from UserController because it makes more sense to have it here since it is a book-operation and not user-operation */
         [HttpGet]
         [Route("GetUserBooks")]
