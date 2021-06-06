@@ -32,6 +32,7 @@ namespace BookApp.Controllers
         }
 
         /* This method was from UserController because it makes more sense to have it here since it is a book-operation and not user-operation */
+        /* This method was from UserController because it makes more sense to have it here since it is a book-operation and not user-operation */
         [HttpGet]
         [Route("GetUserBooks")]
         public HttpResponseMessage GetUserBooks(Guid userId)
@@ -46,6 +47,50 @@ namespace BookApp.Controllers
         }
 
         /* This method was from UserController because it makes more sense to have it here since it is a book-operation and not user-operation */
+        [HttpPost]
+        [Route("CreateUserBook")]
+        public HttpResponseMessage SaveBook([FromUri] Guid userId, [FromBody] Book book)
+        {
+            if (book == null)
+                throw new APIException() { ErrorDescription = "Bad Request. Provide valid book object. Object can't be null." };
+            if (userId == null || userId == Guid.Empty)
+                throw new APIException() { ErrorDescription = "Bad Request. Provide valid userId guid. Can't be empty guid." };
+            book.UserId = userId;
+            BookService.AddBook(book);
+            Book result = BookService.GetBookById(book.Id);
+            if (result != null)
+                return Request.CreateResponse(HttpStatusCode.OK, result, globalMediaTypeFormatters.JsonFormatter);
+            else
+                throw new APIDataException() { ErrorCode = (int)ErrorCodes_Book.SavingBook, ErrorDescription = "Error Saving Book" };
+        }
+
+        /*
+         * This method has had it Route value changed to avoid using querystring.
+         * The exception-lines were also changed to reflect the default values in the exception class.
+         * This call also makes use of DTO to avoid returning specific data (in this example "createdDatetime" and "userId").
+         * Depending on usage the DTO might be placed elsewhere.
+         */
+        [HttpGet]
+        [Route("GetBookById/{bookId}")]
+        public HttpResponseMessage GetBookById(Guid bookId)
+        {
+            if (bookId == null || bookId == Guid.Empty)
+                throw new APIException() { ErrorDescription = "Bad Request. Provide valid guid. Can't be empty guid." };
+            Book book = BookService.GetBookById(bookId);
+            if (book != null)
+            {
+                DataTransferObjects.BookDTO bookDTO = new DataTransferObjects.BookDTO();
+                bookDTO.Id = book.Id;
+                bookDTO.Title = book.Title;
+                bookDTO.Author = book.Author;
+                return Request.CreateResponse(HttpStatusCode.OK, bookDTO, globalMediaTypeFormatters.JsonFormatter);
+            }
+            else
+            {
+                throw new APIDataException() { ErrorCode = (int)ErrorCodes_Book.FindingBook, ErrorDescription = "No book found" };
+            }
+        }
+
         [HttpPost]
         [Route("CreateBook")]
         public HttpResponseMessage SaveBook([FromBody] Book book)
