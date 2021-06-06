@@ -21,18 +21,23 @@ I have moved these methods to BookController with the paths /api/books/GetUserBo
 There is no problem is calling them using books.
 
 The GetMoreUserBooks method does not makes a whole lot of sens to I changed the approach.
+
 I have disabled GetMoreUserBooks (returns null) to make the output look as expected: a flat JSON array of books in the format "[ { book 1 }, { book 2 }, { book 3 } ]".
+
 Earlier it returned an output in the format: "[ { book 1 [ { book 2, book 3} ] }, { book 2 [ { book 1, book 3} ] }, { book 3 [ { book 1, book 2 } ] } ] "
 
 
-* Paths vs. QueryStrings:
+Paths vs. QueryStrings:
+
 We could look into using URLs as "/api/books/GetBookById/B1E83BD4-6F22-4137-9033-6843F9E68DD8" instead of using querystrings.
 
 
-* Book vs. BookExtended
+Book vs. BookExtended:
+
 I have created a new class in Models called "BookBase" which contains the base elements used by both Book and BookExtended.
 
 
-* Domain-models vs. DTOs:
+Domain-models vs. DTOs:
+
 I have made an example of using DTO to hide data from the outbound JSON.
 
